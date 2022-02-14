@@ -5,8 +5,8 @@
 ### Definition
 
 Write a program (with tests) that implements "long" arithmetics addition. The program may contain
-a `LongAdd` function, which accepts two decimal numbers encoded as a string. The function should
-return a sum of `a` and `b`.
+a `LongAdd` function, which accepts two decimal numbers encoded as strings. The function should
+return the sum of `a` and `b`.
 
 ```go
 func LongAdd(a, b string) string { ... }
@@ -26,7 +26,12 @@ func LongAdd(a, b string) string { ... }
 
 ### Definition
 
-Write a program that outputs N-th Fibonacci sequence number, where N can be really large
+Write a program that outputs N-th Fibonacci sequence number, where N can be large (500 is large here, since
+the sequence grows exponentially). The program may contain the following function:
+
+```go
+func LongFibonacci(n int) string { ... }
+```
 
 ### Test examples
 
