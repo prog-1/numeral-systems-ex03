@@ -1,5 +1,7 @@
 # Numeral Systems
 
+> Warning: It is not allowed to use any external long maths / big numbers libraries.
+
 ## Task 1: Long Addition Base 10 (100%)
 
 ### Definition
