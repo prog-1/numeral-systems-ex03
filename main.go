@@ -33,17 +33,21 @@ func LongAdd(a, b string) (s string) {
 				tmp = 0
 
 			} else {
+
 				r = append(r, rune(Byte2Number(a[i])+tmp))
 				tmp = 0
 
 			}
 
 		}
+
 	}
 	if tmp != 0 {
-		r = append(r, 49)
+		r = append(r, 1)
 	}
+
 	var r2 []rune
+
 	for i := len(r) - 1; i >= 0; i-- {
 		r2 = append(r2, r[i]+48)
 	}
