@@ -29,11 +29,7 @@ func LongAdd(a, b string) string {
 	a, b = Normalize(a, b)
 	for i := len(a) - 1; i >= 0; i-- {
 		num := (a[i] - '0') + (b[i] - '0') + add
-		if num > 9 {
-			add = 1
-		} else {
-			add = 0
-		}
+		add = num / 10
 		result = string((num%10)+'0') + result
 	}
 	if add != 0 {
@@ -42,17 +38,17 @@ func LongAdd(a, b string) string {
 	return result
 }
 
+func Byte2Number(a byte) int {
+	return strings.Index(base36, string(a))
+}
+
 func LongAddWithBase(a, b string, base int) string {
 	var result string
 	var add int
 	a, b = Normalize(a, b)
 	for i := len(a) - 1; i >= 0; i-- {
-		num := (strings.Index(base36, string(a[i]))) + (strings.Index(base36, string(b[i]))) + add
-		if num >= base {
-			add = 1
-		} else {
-			add = 0
-		}
+		num := Byte2Number(a[i]) + Byte2Number(b[i]) + add
+		add = num / base
 		result = string(base36[num%base]) + result
 	}
 	if add != 0 {
