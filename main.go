@@ -25,7 +25,8 @@ func Normalize(a, b string) (string, string) {
 func LongAdd(a, b string) string {
 	result := ""
 	var add uint8
-
+	a, b = Normalize(a, b)
+	fmt.Println(a, b)
 	for i := len(a) - 1; i >= 0; i-- {
 		num := (a[i] - '0') + (b[i] - '0') + add
 		if num > 9 {
@@ -36,11 +37,11 @@ func LongAdd(a, b string) string {
 		result = string((num%10)+'0') + result
 	}
 	if add != 0 {
-		result = LongAdd(b[:len(a)-1], "1") + result
+		result = "1" + result
 	}
 	return result
 }
 
 func main() {
-	fmt.Println(LongAdd("12", "93"))
+
 }
