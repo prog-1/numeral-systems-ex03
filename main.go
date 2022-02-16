@@ -2,11 +2,37 @@ package main
 
 import "fmt"
 
+func zeros(a string, i int) string {
+	for ; i > 0; i-- {
+		a = "0" + a
+	}
+	return a
+}
+
 func LongAdd(a, b string) (s string) {
+	var transfer byte
+	if len(a) > len(b) {
+		b = zeros(b, len(a)-len(b))
+	} else {
+		a = zeros(a, len(b)-len(a))
+	}
+	for i := len(a) - 1; i >= 0; i-- {
+		num := (a[i] - '0') + (b[i] - '0') + transfer
+		transfer = num / 10
+		s = string(num%10+'0') + s
+	}
+	if transfer > 0 {
+		s = "1" + s
+	}
 	return s
 }
+
 func LongFibonacci(n int) (s string) {
-	return s
+	a, b := "0", "1"
+	for i := 0; i < n; i++ {
+		a, b = b, LongAdd(a, b)
+	}
+	return a
 }
 
 func mainMenu() (choice int) {
@@ -32,7 +58,7 @@ func main() {
 		} else if choice == 2 {
 			fmt.Print("Enter the  N-th Fibonacci sequence number:")
 			fmt.Scanln(&n)
-			fmt.Printf("%vth Fibonacci number is %v", a, LongFibonacci(n))
+			fmt.Printf("%vth Fibonacci number is %v", n, LongFibonacci(n))
 		} else if choice == 3 {
 			break
 		} else {
