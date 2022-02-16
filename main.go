@@ -8,7 +8,7 @@ import (
 const base36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 func addZeros(a string, time int) string {
-	for i := time; i > 0; i-- {
+	for ; time > 0; time-- {
 		a = "0" + a
 	}
 	return a
@@ -16,23 +16,20 @@ func addZeros(a string, time int) string {
 
 func Normalize(a, b string) (string, string) {
 	if len(a) > len(b) {
-		b = addZeros(b, len(a)-len(b))
-	} else {
-		a = addZeros(a, len(b)-len(a))
+		return a, addZeros(b, len(a)-len(b))
 	}
-	return a, b
+	return addZeros(a, len(b)-len(a)), b
 }
 
 func LongAdd(a, b string) string {
 	var result string
-	var add uint8
+	var num uint8
 	a, b = Normalize(a, b)
 	for i := len(a) - 1; i >= 0; i-- {
-		num := (a[i] - '0') + (b[i] - '0') + add
-		add = num / 10
+		num = (a[i] - '0') + (b[i] - '0') + num/10
 		result = string((num%10)+'0') + result
 	}
-	if add != 0 {
+	if num/10 != 0 {
 		result = "1" + result
 	}
 	return result
@@ -57,16 +54,13 @@ func LongAddWithBase(a, b string, base int) string {
 	return result
 }
 func LongFibonacci(n int) string {
-	if n == 0 {
-		return "0"
-	}
 	prev, now := "0", "1"
-	for i := 1; i < n; i++ {
-		prev, now = now, LongAdd(prev, now)
+	for ; n > 0; n-- {
+		prev, now = now, LongAdd(now, prev)
 	}
-	return now
+	return prev
 }
 
 func main() {
-	fmt.Println(LongAddWithBase("123", "2", 5))
+	fmt.Println(LongAdd("123", "2"))
 }
