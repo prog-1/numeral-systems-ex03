@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 // I know there is a better way of doing this
 
 func addZeros(a string, time int) string {
@@ -26,7 +22,6 @@ func LongAdd(a, b string) string {
 	result := ""
 	var add uint8
 	a, b = Normalize(a, b)
-	fmt.Println(a, b)
 	for i := len(a) - 1; i >= 0; i-- {
 		num := (a[i] - '0') + (b[i] - '0') + add
 		if num > 9 {
@@ -40,6 +35,13 @@ func LongAdd(a, b string) string {
 		result = "1" + result
 	}
 	return result
+}
+func LongFibonacci(n int) string {
+	prev, now := "0", "1"
+	for i := 1; i < n; i++ {
+		prev, now = now, LongAdd(prev, now)
+	}
+	return now
 }
 
 func main() {
