@@ -28,8 +28,8 @@ func LongAdd(a, b string) (s string) {
 			}
 		} else {
 			if Byte2Number(a[i])+tmp > 9 {
-				r = append(r, 48)
-				r = append(r, 49)
+				r = append(r, 0)
+				r = append(r, 1)
 				tmp = 0
 
 			} else {
@@ -58,17 +58,17 @@ func Byte2Number(a byte) int {
 	return strings.Index(base36, string(a))
 }
 
-// func LongFibonacci(n int) string {
-// 	a, b := "0", "1"
-// 	var i int
-// 	for ; i < n-1; i++ {
-// 		a, b = b, LongAdd(a, b)
+func LongFibonacci(n int) string {
+	a, b := "0", "1"
+	var i int
+	for ; i < n-1; i++ {
+		a, b = b, LongAdd(a, b)
 
-// 	}
-// 	return b
-// }
+	}
+	return b
+}
 func main() {
 	fmt.Println(LongAdd("98765432109876543210987654321098765432109876543210",
 		"22222222222222222222222222222222222222222222222222"))
-	// fmt.Println(LongFibonacci(10))
+	fmt.Println(LongFibonacci(500))
 }
