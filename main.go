@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 const base36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -55,7 +54,12 @@ func LongAdd(a, b string) (s string) {
 	return s
 }
 func Byte2Number(a byte) int {
-	return strings.Index(base36, string(a))
+	for i, c := range base36 {
+		if c == rune(a) {
+			return i
+		}
+	}
+	return -1
 }
 
 func LongFibonacci(n int) string {
@@ -115,8 +119,8 @@ func LongAddEx(a, b string, base int) (s string) {
 	return s
 }
 func main() {
-	fmt.Println(LongAdd("98765432109876543210987654321098765432109876543210",
-		"22222222222222222222222222222222222222222222222222"))
-	fmt.Println(LongFibonacci(500))
+	// fmt.Println(LongAdd("98765432109876543210987654321098765432109876543210",
+	// 	"22222222222222222222222222222222222222222222222222"))
+	// fmt.Println(LongFibonacci(500))
 	fmt.Println(LongAddEx("55555", "55", 10))
 }
