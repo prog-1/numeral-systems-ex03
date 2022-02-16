@@ -24,6 +24,26 @@ func TestLongAdd(t *testing.T) {
 		})
 	}
 }
+
+func TestLongAddWithBase(t *testing.T) {
+	for _, tc := range []struct {
+		name      string
+		a         string
+		b         string
+		base      int
+		sumResult string
+	}{
+		{"base 10 sum", "55555", "55", 10, "55610"},
+		{"base 5 sum", "123", "2", 5, "130"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			if got := LongAddWithBase(tc.a, tc.b, tc.base); got != tc.sumResult {
+				t.Errorf("LongAdd(%v, %v, %v) = %v, want %v", tc.a, tc.b, tc.base, got, tc.sumResult)
+			}
+		})
+	}
+}
+
 func TestLongFibonacci(t *testing.T) {
 	for _, tc := range []struct {
 		n      int

@@ -1,6 +1,11 @@
 package main
 
-// I know there is a better way of doing this
+import (
+	"fmt"
+	"strings"
+)
+
+const base36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 func addZeros(a string, time int) string {
 	for i := time; i > 0; i-- {
@@ -19,7 +24,7 @@ func Normalize(a, b string) (string, string) {
 }
 
 func LongAdd(a, b string) string {
-	result := ""
+	var result string
 	var add uint8
 	a, b = Normalize(a, b)
 	for i := len(a) - 1; i >= 0; i-- {
@@ -37,18 +42,18 @@ func LongAdd(a, b string) string {
 	return result
 }
 
-func LongAdd2(a, b string) string {
-	result := ""
-	var add uint8
+func LongAddWithBase(a, b string, base int) string {
+	var result string
+	var add int
 	a, b = Normalize(a, b)
 	for i := len(a) - 1; i >= 0; i-- {
-		num := (a[i] - '0') + (b[i] - '0') + add
-		if num > 9 {
+		num := (strings.Index(base36, string(a[i]))) + (strings.Index(base36, string(b[i]))) + add
+		if num >= base {
 			add = 1
 		} else {
 			add = 0
 		}
-		result = string((num%10)+'0') + result
+		result = string(base36[num%base]) + result
 	}
 	if add != 0 {
 		result = "1" + result
@@ -67,5 +72,5 @@ func LongFibonacci(n int) string {
 }
 
 func main() {
-
+	fmt.Println(LongAddWithBase("123", "2", 5))
 }
