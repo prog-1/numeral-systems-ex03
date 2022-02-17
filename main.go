@@ -8,10 +8,7 @@ import (
 const base36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 func addZeros(a string, time int) string {
-	for ; time > 0; time-- {
-		a = "0" + a
-	}
-	return a
+	return strings.Repeat("0", time) + a
 }
 
 func Normalize(a, b string) (string, string) {
