@@ -1,7 +1,6 @@
-package main
+package LongAdd
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -56,8 +55,4 @@ func LongFibonacci(n int) string {
 		prev, now = now, LongAdd(now, prev)
 	}
 	return prev
-}
-
-func main() {
-	fmt.Println(LongAdd("123", "2"))
 }
