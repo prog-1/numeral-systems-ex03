@@ -27,3 +27,22 @@ func TestLongAdd(t *testing.T) {
 		})
 	}
 }
+
+func TestLongFibonacci(t *testing.T) {
+	for _, tc := range []struct {
+		name string
+		n    int
+		want string
+	}{
+		{"test with 0", 0, "0"},
+		{"simple", 1, "1"},
+		{"from README", 10, "55"},
+		{"from README", 500, "139423224561697880139724382870407283950070256587697307264108962948325571622863290691557658876222521294125"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			if got := LongFibonacci(tc.n); got != tc.want {
+				t.Errorf("LongFibonacci(%v) = %v, want = %v", tc.n, got, tc.want)
+			}
+		})
+	}
+}
